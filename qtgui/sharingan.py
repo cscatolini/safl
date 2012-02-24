@@ -3,7 +3,7 @@ from PyQt4 import QtCore
 from PyQt4 import QtGui
 from qtdesigner import Ui_MainWindow
 import sys, scipy, pylab, simplejson
-
+import scipy.misc
 
 
 class DesignerMainWindow(QtGui.QMainWindow, Ui_MainWindow):
@@ -24,21 +24,11 @@ class DesignerMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 
 
 	def refreshImages(self, image):
-
-		self.im1.canvas.ax.clear()
-		self.im2.canvas.ax.clear()
-		self.im3.canvas.ax.clear()
-		self.im4.canvas.ax.clear()
-
-		self.im1.canvas.ax.imshow(scipy.lena())
-		self.im2.canvas.ax.imshow(scipy.lena())
-		self.im3.canvas.ax.imshow(scipy.lena())
-		self.im4.canvas.ax.imshow(scipy.lena())
-
-		self.im1.canvas.draw()
-		self.im2.canvas.draw()
-		self.im3.canvas.draw()
-		self.im4.canvas.draw()
+		imL = [self.im1, self.im2, self.im3, self.im4]
+		for im in imL:
+			im.canvas.ax.clear()
+			im.canvas.ax.imshow(scipy.misc.lena(), cmap=pylab.cm.bone, interpolation='nearest')
+			im.canvas.draw()
 
 		self.cid = self.im1.canvas.mpl_connect('button_press_event', self.onclick)
 
@@ -50,18 +40,5 @@ app = QtGui.QApplication(sys.argv)
 dmw = DesignerMainWindow()
 dmw.show()
 sys.exit(app.exec_())
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
