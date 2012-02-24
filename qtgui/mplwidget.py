@@ -8,9 +8,7 @@ class MplCanvas(FigureCanvas):
 		self.fig = Figure()
 		self.ax = self.fig.add_subplot(111)
 		FigureCanvas.__init__(self, self.fig)
-		FigureCanvas.setSizePolicy(self,
-							QtGui.QSizePolicy.Expanding,
-							QtGui.QSizePolicy.Expanding)
+		FigureCanvas.setSizePolicy(self,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Expanding)
 		FigureCanvas.updateGeometry(self)
 
 
@@ -22,7 +20,4 @@ class MplWidget(QtGui.QWidget):
 		self.vbl = QtGui.QVBoxLayout()
 		self.vbl.addWidget(self.canvas)
 		self.setLayout(self.vbl)
-
-
-
 
