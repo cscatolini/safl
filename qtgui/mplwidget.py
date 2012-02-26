@@ -21,3 +21,4 @@ class MplWidget(QtGui.QWidget):
     vbox.addWidget(self.canvas)
     vbox.addWidget(self.mpl_toolbar)
     self.setLayout(vbox)
+

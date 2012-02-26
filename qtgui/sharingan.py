@@ -30,10 +30,30 @@ class DesignerMainWindow(QtGui.QMainWindow, Ui_MainWindow):
             im.axes.imshow(scipy.misc.lena(), cmap=pylab.cm.bone,
                 interpolation='nearest')
             im.canvas.draw()
-        self.cid = self.im1.canvas.mpl_connect('button_press_event', self.onclick)
+        self.cid = self.im1.canvas.mpl_connect('pick_event', self.onpick)
+        edges = np.load('edges-00000001.npz')
+        self.plotEdges(edges['edges'],self.im1)
 
-    def onclick(self,event):
-        print 'button=%f, x=%f, y=%f, xdata=%f, ydata=%f'%(event.button, event.x, event.y, event.xdata, event.ydata)
+    def onpick(self, event):
+      for indx, line in enumerate(self.im1.axes.lines):
+        if (event.artist == line):
+          li = self.im1.axes.lines.pop(indx)
+          self.im2.axes.plot( li.get_xdata(orig=True), li.get_ydata(orig=True) , picker=1)
+          break
+      
+      self.im1.canvas.draw()
+      self.im2.canvas.draw()
+
+    def plotEdges(self, edges, im):
+      for line in edges:
+        flag = True
+        for point in line:
+          if (point[0] < 0 or point[1] < 0):
+            flag = False
+        if (flag):
+          im.axes.plot(line, picker=1)
+      im.canvas.draw()
+        
 
 app = QtGui.QApplication(sys.argv)
 

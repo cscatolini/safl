@@ -12,7 +12,7 @@ for k in range(20):
     ll.append(c_[xx,y])
 
 
-ll= array(ll)
+ll= array(ll, dtype=object)
 
 
 for l in ll:
