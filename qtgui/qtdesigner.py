@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'qtdesigner.ui'
 #
-# Created: Fri Feb 24 16:59:45 2012
+# Created: Mon Feb 27 14:21:27 2012
 #      by: PyQt4 UI code generator 4.8.5
 #
 # WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
-        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "MainWindow", None, QtGui.QApplication.UnicodeUTF8))
+        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "SAFL", None, QtGui.QApplication.UnicodeUTF8))
         self.Centralwidget = QtGui.QWidget(MainWindow)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -57,9 +57,20 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.addWidget(self.im4)
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
         self.verticalLayout_3.addLayout(self.verticalLayout_2)
+        self.horizontalLayout_3 = QtGui.QHBoxLayout()
+        self.horizontalLayout_3.setObjectName(_fromUtf8("horizontalLayout_3"))
         self.comboBox = QtGui.QComboBox(self.Centralwidget)
         self.comboBox.setObjectName(_fromUtf8("comboBox"))
-        self.verticalLayout_3.addWidget(self.comboBox)
+        self.horizontalLayout_3.addWidget(self.comboBox)
+        self.pushButton = QtGui.QPushButton(self.Centralwidget)
+        self.pushButton.setText(QtGui.QApplication.translate("MainWindow", "<", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButton.setObjectName(_fromUtf8("pushButton"))
+        self.horizontalLayout_3.addWidget(self.pushButton)
+        self.pushButton_2 = QtGui.QPushButton(self.Centralwidget)
+        self.pushButton_2.setText(QtGui.QApplication.translate("MainWindow", ">", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButton_2.setObjectName(_fromUtf8("pushButton_2"))
+        self.horizontalLayout_3.addWidget(self.pushButton_2)
+        self.verticalLayout_3.addLayout(self.horizontalLayout_3)
         MainWindow.setCentralWidget(self.Centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 25))
