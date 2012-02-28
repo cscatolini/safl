@@ -60,29 +60,52 @@ class DesignerMainWindow(QtGui.QMainWindow, Ui_MainWindow):
             im.axes.imshow(image, cmap=pylab.cm.bone,
                 interpolation='nearest')
             im.canvas.draw()          
-        self.cid = self.im1.canvas.mpl_connect('pick_event', self.onpick)
+        self.im1.canvas.mpl_connect('pick_event', self.onpick)
+        self.im2.canvas.mpl_connect('pick_event', self.onpick)
+        self.im3.canvas.mpl_connect('pick_event', self.onpick)
+        self.im4.canvas.mpl_connect('pick_event', self.onpick)
         edges = np.load(edges)
         self.plotEdges(edges['edges'],self.im1)
 
     def onpick(self, event):
       if event.mouseevent.button == 1:
-        for indx, line in enumerate(self.im1.axes.lines):
-          if (event.artist == line):
-            li = self.im1.axes.lines.pop(indx)
+        axes = event.artist.get_axes()
+        if axes == self.im1.axes:
+          indx = self.im1.axes.lines.index(event.artist)
+          li = self.im1.axes.lines.pop(indx)
 
-            id = self.comboBox.currentIndex()+1
-            
-            if id == 1:						
-              self.im2.axes.plot( li.get_xdata(orig=True), li.get_ydata(orig=True) , picker=1)
-              self.im2.canvas.draw()
-            elif id == 2:
-              self.im3.axes.plot( li.get_xdata(orig=True), li.get_ydata(orig=True) , picker=1)
-              self.im3.canvas.draw()
-            elif id == 3:
-              self.im4.axes.plot( li.get_xdata(orig=True), li.get_ydata(orig=True) , picker=1)
-              self.im4.canvas.draw()
-            self.im1.canvas.draw()
-            break						
+          id = self.comboBox.currentIndex()+1
+          
+          if id == 1:						
+            self.im2.axes.plot( li.get_xdata(orig=True), li.get_ydata(orig=True) , picker=1)
+            self.im2.canvas.draw()
+          elif id == 2:
+            self.im3.axes.plot( li.get_xdata(orig=True), li.get_ydata(orig=True) , picker=1)
+            self.im3.canvas.draw()
+          elif id == 3:
+            self.im4.axes.plot( li.get_xdata(orig=True), li.get_ydata(orig=True) , picker=1)
+            self.im4.canvas.draw()
+          self.im1.canvas.draw()                        
+        elif axes == self.im2.axes:
+          indx = self.im2.axes.lines.index(event.artist)
+          li = self.im2.axes.lines.pop(indx)
+          self.im1.axes.plot( li.get_xdata(orig=True), li.get_ydata(orig=True) , picker=1)
+          self.im1.canvas.draw()
+          self.im2.canvas.draw()
+        elif axes == self.im3.axes:
+          indx = self.im3.axes.lines.index(event.artist)
+          li = self.im3.axes.lines.pop(indx)
+          self.im1.axes.plot( li.get_xdata(orig=True), li.get_ydata(orig=True) , picker=1)
+          self.im1.canvas.draw()          
+          self.im3.canvas.draw()
+        elif axes == self.im4.axes:
+          indx = self.im4.axes.lines.index(event.artist)
+          li = self.im4.axes.lines.pop(indx)
+          self.im1.axes.plot( li.get_xdata(orig=True), li.get_ydata(orig=True) , picker=1)
+          self.im1.canvas.draw()          
+          self.im4.canvas.draw()
+
+
 
     def plotEdges(self, edges, im):
       for line in edges:
